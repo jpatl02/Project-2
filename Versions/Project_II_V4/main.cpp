@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Jazmyne Patlan
- * Created on February 10th, 2023, 3:58 PM
+ * Created on February 10th, 2023, 11:23 PM
  * Purpose:  Game of Left Center Right
  */
 
@@ -23,12 +23,13 @@ using namespace std;
 //Function Prototypes
 void p1turn(int &, int &, int &, int &, string &);
 void p2turn(int &, int &, int &, int &, string &);
-float average(float , int );
-float average(float , unsigned char );
+void p3turn(int &, int &, int &, int &, string &);
+void p4turn(int &, int &, int &, int &, string &);
 float intrst(float, int=3, int=10);
 void end();
-void statTbl(int, int [], int [], float [], int , int, int, int);
-void dsplTbl(int, int [], int [], float [], string, string, string, string);
+void statTbl(float, int [], int [], float [], int , int, int, int);
+void statTbl(float, int [], int [], float [], string, string, string, string);
+void bublSrt(float []);
 
 //Execution begins here at main
 int main(int argc, char** argv) {
@@ -72,8 +73,8 @@ int main(int argc, char** argv) {
     cout<<"Player 2         Pot          Player 4"<<endl;
     cout<<"               Player 1               "<<endl<<endl;
     
-    in.open("input4.dat",ios::in);               //Input and output files
-    out.open("LCRoutput4.dat",ios::out);
+    in.open("input5.dat",ios::in);               //Input and output files
+    out.open("LCRoutput5.dat",ios::out);
     in>>p1Tkns>>p2Tkns>>p3Tkns>>p4Tkns>>pot>>loop>>p1avg>>count;
     
     
@@ -87,6 +88,10 @@ int main(int argc, char** argv) {
     int sumTkns[SIZE];
     float avgTkns[SIZE];
     int plrTkns[SIZE];
+    int tknPrRd[SIZE];
+    
+    
+    
     
     
     //Map/Process the Inputs -> Outputs
@@ -183,26 +188,18 @@ int main(int argc, char** argv) {
             if (p2Tkns==0&&p3Tkns==0&&p4Tkns==0){      //If one player has...
                 winner=true;                          //tokens they win
                 out<<"GAME OVER - "<<player1<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,count);
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p3Tkns==0&&p4Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player2<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,count);
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p2Tkns==0&&p4Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player3<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,count);
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p2Tkns==0&&p3Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player4<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,count);
                 roll='0';                        //Set roll to zero to exit loop
             }
             if (!winner){             //If no players won, display input message
@@ -296,26 +293,18 @@ int main(int argc, char** argv) {
             if (p2Tkns==0&&p3Tkns==0&&p4Tkns==0){      //If one player has...
                 winner=true;                          //tokens they win
                 out<<"GAME OVER - "<<player1<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,count);
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p3Tkns==0&&p4Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player2<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,count);
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p2Tkns==0&&p4Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player3<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,count);
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p2Tkns==0&&p3Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player4<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,count);
                 roll='0';                        //Set roll to zero to exit loop
             }
             if (!winner){             //If no players won, display input message
@@ -338,15 +327,7 @@ int main(int argc, char** argv) {
                               (die123==4)? "Dot":
                               (die123==5)? "Dot": "Dot";
 
-                    if (dieFace=="Left"){   //Increase/decrease tokens for left
-                        p4Tkns+=1;          
-                        --p3Tkns;}
-                    if (dieFace=="Right"){  //Increase/decrease tokens for right
-                        p2Tkns+=1;
-                        --p3Tkns;}
-                    if (dieFace=="Star"){   //Increase/decrease tokens for star
-                        pot+=1;
-                        --p3Tkns;}
+                    p3turn(p2Tkns,p3Tkns,p4Tkns,pot,dieFace);
 
                     cout<<dieFace<<"   ";   //Display dice results
                 }
@@ -367,15 +348,7 @@ int main(int argc, char** argv) {
                     if (die123==6){
                         dieFace="Dot";}
 
-                    if (dieFace=="Left"){  //Increase/decrease tokens for left
-                        p4Tkns+=1;
-                        --p3Tkns;}
-                    if (dieFace=="Right"){ //Increase/decrease tokens for right
-                        p2Tkns+=1;
-                        --p3Tkns;}
-                    if (dieFace=="Star"){  //Increase/decrease tokens for star
-                        pot+=1;
-                        --p3Tkns;}
+                    p3turn(p2Tkns,p3Tkns,p4Tkns,pot,dieFace);
 
                     cout<<dieFace<<"   ";  //Display dice results
                     loop++;                //Increment loop until at 2
@@ -394,15 +367,7 @@ int main(int argc, char** argv) {
                     default:cout<<"Error"<<endl;  //If any other number, error
                 }
             
-                if (dieFace=="Left"){     //Increase/decrease tokens for left
-                    p4Tkns+=1;
-                    --p3Tkns;}
-                if (dieFace=="Right"){    //Increase/decrease tokens for right
-                    p2Tkns+=1;
-                    --p3Tkns;}
-                if (dieFace=="Star"){     //Increase/decrease tokens for star
-                    pot+=1;
-                    --p3Tkns;}
+                p3turn(p2Tkns, p3Tkns,p4Tkns,pot,dieFace);
                 
                 cout<<dieFace<<"   ";     //Display dice results
             }else{                        //If zero tokens, skip turn
@@ -431,26 +396,18 @@ int main(int argc, char** argv) {
             if (p2Tkns==0&&p3Tkns==0&&p4Tkns==0){      //If one player has...
                 winner=true;                          //tokens they win
                 out<<"GAME OVER - "<<player1<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,static_cast<unsigned char>(count));
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p3Tkns==0&&p4Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player2<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,static_cast<unsigned char>(count));
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p2Tkns==0&&p4Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player3<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,static_cast<unsigned char>(count));
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p2Tkns==0&&p3Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player4<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,static_cast<unsigned char>(count));
                 roll='0';                        //Set roll to zero to exit loop
             }
             if (!winner){             //If no players won, display input message
@@ -473,15 +430,7 @@ int main(int argc, char** argv) {
                               (die123==4)? "Dot":
                               (die123==5)? "Dot": "Dot";
 
-                    if (dieFace=="Left"){   //Increase/decrease tokens for left
-                        p1Tkns+=1;          
-                        p4Tkns-=1;}
-                    if (dieFace=="Right"){  //Increase/decrease tokens for right
-                        p3Tkns+=1;
-                        p4Tkns-=1;}
-                    if (dieFace=="Star"){   //Increase/decrease tokens for star
-                        pot+=1;
-                        p4Tkns-=1;}
+                    p4turn(p1Tkns,p3Tkns,p4Tkns,pot,dieFace);
 
                     cout<<dieFace<<"   ";   //Display dice results
                 }
@@ -502,15 +451,7 @@ int main(int argc, char** argv) {
                     if (die123==6){
                         dieFace="Dot";}
 
-                    if (dieFace=="Left"){  //Increase/decrease tokens for left
-                        p1Tkns+=1;
-                        p4Tkns-=1;}
-                    if (dieFace=="Right"){ //Increase/decrease tokens for right
-                        p3Tkns+=1;
-                        p4Tkns-=1;}
-                    if (dieFace=="Star"){  //Increase/decrease tokens for star
-                        pot+=1;
-                        p4Tkns-=1;}
+                    p4turn(p1Tkns,p3Tkns,p4Tkns,pot,dieFace);
 
                     cout<<dieFace<<"   ";  //Display dice results
                     loop++;                //Increment loop until at 2
@@ -529,15 +470,7 @@ int main(int argc, char** argv) {
                     default:cout<<"Error"<<endl;  //If any other number, error
                 }
             
-                if (dieFace=="Left"){     //Increase/decrease tokens for left
-                    p1Tkns+=1;
-                    --p4Tkns;}
-                if (dieFace=="Right"){    //Increase/decrease tokens for right
-                    p3Tkns+=1;
-                    --p4Tkns;}
-                if (dieFace=="Star"){     //Increase/decrease tokens for star
-                    pot+=1;
-                    --p4Tkns;}
+                p4turn(p1Tkns,p3Tkns,p4Tkns,pot,dieFace);
                 
                 cout<<dieFace<<"   ";     //Display dice results
             }else{                        //If zero tokens, skip turn
@@ -566,26 +499,18 @@ int main(int argc, char** argv) {
             if (p2Tkns==0&&p3Tkns==0&&p4Tkns==0){      //If one player has...
                 winner=true;                          //tokens they win
                 out<<"GAME OVER - "<<player1<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,static_cast<unsigned char>(count));
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p3Tkns==0&&p4Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player2<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,static_cast<unsigned char>(count));
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p2Tkns==0&&p4Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player3<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,static_cast<unsigned char>(count));
                 roll='0';                        //Set roll to zero to exit loop
             }else if (p1Tkns==0&&p2Tkns==0&&p3Tkns==0){ //If one player has...
                 winner=true;                           //tokens they win
                 out<<"GAME OVER - "<<player4<<" Wins"<<endl;
-                out<<"Average tokens "<<player1<<" had: ";
-                out<<average(p1avg,static_cast<unsigned char>(count));
                 roll='0';                        //Set roll to zero to exit loop
             }
             if (!winner){             //If no players won, display input message
@@ -613,8 +538,10 @@ int main(int argc, char** argv) {
     out<<", after 10 years the winner would have $";
     out<<setprecision(2)<<fixed<<intrst(i)<<endl;
     
-    statTbl(count, plrTkns, sumTkns, avgTkns, p1avg, p2avg, p3avg, p4avg);
-    dsplTbl(count, plrTkns, sumTkns, avgTkns, player1,player2,player3,player4);
+    statTbl(static_cast<float>(count), plrTkns, sumTkns, avgTkns, p1avg, p2avg, p3avg, p4avg);
+    statTbl(static_cast<float>(count), plrTkns, sumTkns, avgTkns, player1,player2,player3,player4);
+    bublSrt(avgTkns);
+    cout<<"The lowest token average was: "<<avgTkns[0]<<endl<<endl;
     
     //Clean up memory and files
     in.close();
@@ -649,14 +576,28 @@ void p2turn(int &p1Tkns, int &p2Tkns, int &p3Tkns, int &pot, string &dieFace){
                         --p2Tkns;}
 }
 
-float average(float pavg, int count){
-    pavg/=count;                       //Calculate player 1 average
-    return static_cast<int>(pavg);
+void p3turn(int &p2Tkns, int &p3Tkns, int &p4Tkns, int &pot, string &dieFace){
+    if (dieFace=="Left"){   //Increase/decrease tokens for left
+                        p4Tkns+=1;          
+                        --p3Tkns;}
+                    if (dieFace=="Right"){  //Increase/decrease tokens for right
+                        p2Tkns+=1;
+                        --p3Tkns;}
+                    if (dieFace=="Star"){   //Increase/decrease tokens for star
+                        pot+=1;
+                        --p3Tkns;}
 }
 
-float average(float pavg, unsigned char count){
-    pavg/=count;                       //Calculate player 1 average
-    return static_cast<int>(pavg);
+void p4turn(int &p1Tkns, int &p3Tkns, int &p4Tkns, int &pot, string &dieFace){
+    if (dieFace=="Left"){   //Increase/decrease tokens for left
+                        p1Tkns+=1;          
+                        --p4Tkns;}
+                    if (dieFace=="Right"){  //Increase/decrease tokens for right
+                        p3Tkns+=1;
+                        --p4Tkns;}
+                    if (dieFace=="Star"){   //Increase/decrease tokens for star
+                        pot+=1;
+                        --p4Tkns;}
 }
 
 float intrst(float i, int pv, int yrs){
@@ -669,11 +610,9 @@ void end(){
     exit(0);
 }
 
-void statTbl(int count, int plrTkns[], int sumTkns[], float avgTkns[], 
+void statTbl(float count, int plrTkns[], int sumTkns[], float avgTkns[], 
         int p1avg, int p2avg, int p3avg, int p4avg){
- 
-    int numSets=count;
-    
+
     plrTkns[0]=p1avg;
     plrTkns[1]=p2avg;
     plrTkns[2]=p3avg;
@@ -685,7 +624,7 @@ void statTbl(int count, int plrTkns[], int sumTkns[], float avgTkns[],
     }
 }
 
-void dsplTbl(int count, int plrTkns[], int sumTkns[], float avgTkns[], string player1,
+void statTbl(float count, int plrTkns[], int sumTkns[], float avgTkns[], string player1,
         string player2, string player3, string player4){
     cout<<"     Player   Total Tokens   # of Sets   Average Tokens"<<endl;
     for (int j=0; j<4; j++){
@@ -699,22 +638,31 @@ void dsplTbl(int count, int plrTkns[], int sumTkns[], float avgTkns[], string pl
             cout<<setw(11)<<player4;
         }
         
-        cout<<setw(15)<<sumTkns[j]<<setw(12)<<count<<setw(17)<<avgTkns[j]<<endl;
+        cout<<setw(15)<<sumTkns[j]<<setw(12)<<static_cast<int>(count)<<setw(17)<<fixed<<setprecision(2)<<avgTkns[j]<<endl;
     }
     cout<<endl;
 }
 
-//single dimension array
-//Play bonus mini game
-//Enter 25 numbers (All between 1-6)
-//In this program, those numbers in rolls would translate to...
-//If put in order, it would take up until position () to roll a star
-//or up until 
-//Display as function argument
+void bublSrt(float avgTkns[]){
+    bool swap;
+    do{
+        swap=false;
+        for(int i=0; i<3; i++){
+            if (avgTkns[i]>avgTkns[i+1]){
+                int temp=avgTkns[i];
+                avgTkns[i]=avgTkns[i+1];
+                avgTkns[i+1]=temp;
+                swap=true;
+            }
+        }
+    }while(swap);
+}
+
+
+
 
 //2D array..interest up until 10 years
 
-//Parallel array total player tokens, average player tokens?? could also sort 
-//for person with lowest tokens
 
 //Find max amount of tokens player had 
+
