@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=project_i_v10
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/project_i_v10
+CND_ARTIFACT_NAME_Debug=project_ii_v1
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/project_ii_v1
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=projectiv10.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/projectiv10.tar
+CND_PACKAGE_NAME_Debug=projectiiv1.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/projectiiv1.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=project_i_v10
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/project_i_v10
+CND_ARTIFACT_NAME_Release=project_ii_v1
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/project_ii_v1
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=projectiv10.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/projectiv10.tar
+CND_PACKAGE_NAME_Release=projectiiv1.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/projectiiv1.tar
 #
 # include compiler specific variables
 #
