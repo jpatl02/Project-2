@@ -593,53 +593,53 @@ int main(int argc, char** argv) {
 //Increase/decrease tokens for player 1's turn
 void p1turn(int &p1Tkns, int &p2Tkns, int &p4Tkns, int &pot, string &dieFace){
     if (dieFace=="Left"){   //Increase/decrease tokens for left
-                        p2Tkns+=1;          
-                        --p1Tkns;}
-                    if (dieFace=="Right"){  //Increase/decrease tokens for right
-                        p4Tkns+=1;
-                        --p1Tkns;}
-                    if (dieFace=="Star"){   //Increase/decrease tokens for star
-                        pot+=1;
-                        --p1Tkns;}
+        p2Tkns+=1;          
+        --p1Tkns;}
+    if (dieFace=="Right"){  //Increase/decrease tokens for right
+        p4Tkns+=1;
+        --p1Tkns;}
+    if (dieFace=="Star"){   //Increase/decrease tokens for star
+        pot+=1;
+        --p1Tkns;}
 }
 
 //Increase/decrease tokens for player 2's turn
 void p2turn(int &p1Tkns, int &p2Tkns, int &p3Tkns, int &pot, string &dieFace){
     if (dieFace=="Left"){   //Increase/decrease tokens for left
-                        p3Tkns+=1;          
-                        --p2Tkns;}
-                    if (dieFace=="Right"){  //Increase/decrease tokens for right
-                        p1Tkns+=1;
-                        --p2Tkns;}
-                    if (dieFace=="Star"){   //Increase/decrease tokens for star
-                        pot+=1;
-                        --p2Tkns;}
+        p3Tkns+=1;          
+        --p2Tkns;}
+    if (dieFace=="Right"){  //Increase/decrease tokens for right
+        p1Tkns+=1;
+        --p2Tkns;}
+    if (dieFace=="Star"){   //Increase/decrease tokens for star
+        pot+=1;
+        --p2Tkns;}
 }
 
 //Increase/decrease tokens for player 3's turn
 void p3turn(int &p2Tkns, int &p3Tkns, int &p4Tkns, int &pot, string &dieFace){
     if (dieFace=="Left"){   //Increase/decrease tokens for left
-                        p4Tkns+=1;          
-                        --p3Tkns;}
-                    if (dieFace=="Right"){  //Increase/decrease tokens for right
-                        p2Tkns+=1;
-                        --p3Tkns;}
-                    if (dieFace=="Star"){   //Increase/decrease tokens for star
-                        pot+=1;
-                        --p3Tkns;}
+        p4Tkns+=1;          
+        --p3Tkns;}
+    if (dieFace=="Right"){  //Increase/decrease tokens for right
+        p2Tkns+=1;
+        --p3Tkns;}
+    if (dieFace=="Star"){   //Increase/decrease tokens for star
+        pot+=1;
+        --p3Tkns;}
 }
 
 //Increase/decrease tokens for player 4's turn
 void p4turn(int &p1Tkns, int &p3Tkns, int &p4Tkns, int &pot, string &dieFace){
     if (dieFace=="Left"){   //Increase/decrease tokens for left
-                        p1Tkns+=1;          
-                        --p4Tkns;}
-                    if (dieFace=="Right"){  //Increase/decrease tokens for right
-                        p3Tkns+=1;
-                        --p4Tkns;}
-                    if (dieFace=="Star"){   //Increase/decrease tokens for star
-                        pot+=1;
-                        --p4Tkns;}
+        p1Tkns+=1;          
+        --p4Tkns;}
+    if (dieFace=="Right"){  //Increase/decrease tokens for right
+        p3Tkns+=1;
+        --p4Tkns;}
+    if (dieFace=="Star"){   //Increase/decrease tokens for star
+        pot+=1;
+        --p4Tkns;}
 }
 
 //Calculate interest for winnings
