@@ -643,9 +643,9 @@ void p4turn(int &p1Tkns, int &p3Tkns, int &p4Tkns, int &pot, string &dieFace){
 }
 
 //Calculate interest for winnings
-float intrst(float i, int pv, int yrs){
-    i/=100;
-    return pv*pow(1+i,yrs); //Equation to find future value
+float intrst(float intPrct, int pv, int yrs){
+    intPrct/=100;
+    return pv*pow(1+intPrct,yrs); //Equation to find future value
 }
 
 //Set arrays for statistic table
